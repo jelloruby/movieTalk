@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* background: black; */
+}
+
+.slick-prev {
+    left: -3rem;
+    z-index: 1;
+    background: red;
+}
+
+.slick-next {
+    right: -3rem;
+    z-index: 1;
+    background: red;
+}
+
+/* 슬라이드 스타일 */
+.wrap-slider {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.slick-slide {
+    /* margin: 0 .5rem; */
+}
+
+/* 작은 단위 컴포넌트의 스타일 */
+.btn {
+    border: none;
+}
+
+.btn.ticketing-btn {
+    background: rgb(255, 178, 35);
+    width: 90%;
+    padding: .4rem 0;
+    margin: .5rem;
+    border-radius: 5px;
+}
