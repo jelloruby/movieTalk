@@ -1,7 +1,5 @@
 import React from 'react';
-import Nav from '../components/Nav'
-
-// import PropTypes from 'prop-types'
+import Nav from './Nav'
 
 function AppLayout({ children }) {
     return (
@@ -11,9 +9,5 @@ function AppLayout({ children }) {
         </div>
     )
 };
-
-// AppLayout.propTypes = {
-//     children: PropTypes.node.isRequired,
-// };
 
 export default AppLayout;

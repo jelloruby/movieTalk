@@ -45,17 +45,12 @@ function MovieSlider({ movieInfomation }) {
         ],
     };
 
-    const ticketingMovie = () => {
-        router.push("/ticketing")
-    }
-
     return (
         <Slider {...settings}>
             {
                 movieInfomation.map(item => (
-                    <div key={item.id} style={{ margin: '0 1rem' }}>
-                        <MovieInfoLink id={item.id} src={item.poster}/>
-                        <button onClick={ticketingMovie} className="btn ticketing-btn">예매</button>
+                    <div>
+                        <img src={item} style={{ width: '99%', height: '200px' }} />
                     </div>
                 ))
             }

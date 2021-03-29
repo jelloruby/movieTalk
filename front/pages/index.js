@@ -1,39 +1,57 @@
 import React, { useState, useEffect } from 'react'
+import Router from 'next/router';
 
 import AppLayout from '../components/AppLayout'
-import MovieSlider from '../components/MovieSlider'
 
-import MovieInfoData from '../json/movieInfo.json'
-
-import { getMovieList, getMovieFromKMDB } from '../api'
+import { getMovieGenreFromKMDB } from '../api';
 
 function Home() {
-    const { movieInfomation } = MovieInfoData.movie
-    const [boxofficeMovieNames, setboxofficeMovieNames] = useState([])
+    const [inputValue, setInputValue] = useState([]);
 
     useEffect(() => {
-        const fetchMovieList = async () => {
-            const boxofficeList = await getMovieList();
-            setboxofficeMovieNames(movieNameArray(boxofficeList.boxOfficeResult.dailyBoxOfficeList));
-            const result2 = await getMovieFromKMDB("미나리");
-            console.log(result2);
+        const fetch = async () => {
+            const fetchData = await getMovieGenreFromKMDB("코메디");
+            console.log(fetchData);
         }
-        fetchMovieList();
+        fetch()
     }, [])
 
-    const movieNameArray = (list) => {
-        var arr = [];
-        
-        for(let i=0; i<list.length; i++) {
-            arr.push(list[i].movieNm)
-        }
-        return arr;
-    }
+    const handleInputValue = (e) => {
+        setInputValue(e.target.value)
+    };
+
+    const handleSubmitValue = (e) => {
+        e.preventDefault();
+        Router.push({
+            pathname: "/movieSearch",
+            query: { value: inputValue }
+        });
+    };
 
     return (
         <AppLayout>
-            <h2 style={{ textAlign: 'center' }}>박스오피스</h2>
-            <MovieSlider movieInfomation={movieInfomation} />
+            <div style={{ height: '600px', background: 'gray' }}>
+                <h2 style={{ textAlign: 'center' }}>MovieTalk</h2>
+                <form onSubmit={handleSubmitValue} style={{ textAlign: 'center' }}>
+                    <input placeholder="영화명을 입력해주세요." onChange={handleInputValue} className="btn search-btn" />
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <div>
+                <div>
+                    <div>액션 | Action</div>
+                    <div></div>
+                </div>
+                <div>
+                    <div>드라마 | Drama</div>
+                </div>
+                <div>
+                    <div>미스터리 | Mistery</div>
+                </div>
+                <div>
+                    <div>코미디 | Comedy</div>
+                </div>
+            </div>
         </AppLayout>
     )
 }

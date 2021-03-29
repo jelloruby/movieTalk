@@ -10,18 +10,18 @@ body {
 .slick-prev {
     left: -3rem;
     z-index: 1;
-    background: red;
+    background: gray;
 }
 
 .slick-next {
     right: -3rem;
     z-index: 1;
-    background: red;
+    background: gray;
 }
 
 /* 슬라이드 스타일 */
 .wrap-slider {
-    width: 900px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -34,10 +34,12 @@ body {
     border: none;
 }
 
-.btn.ticketing-btn {
+.btn.search-btn {
     background: rgb(255, 178, 35);
-    width: 90%;
-    padding: .4rem 0;
-    margin: .5rem;
-    border-radius: 5px;
+    width: 500px;
+    height: 60px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 2px;
 }
+
