@@ -17,10 +17,7 @@ function movieSearch({ router }) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        Router.push({
-            pathname: "/movieSearch",
-            query: { value: inputValue }
-        });
+
         const fetchMovieList = async () => {
             const fetchData = await getMovieFromKMDB(inputValue);
             if(!fetchData.Data[0].Result) {
@@ -28,25 +25,12 @@ function movieSearch({ router }) {
                 setIsEmptyMovieList(true);
             } else {
                 setMovieList(fetchData.Data[0].Result);
+                console.log(fetchData.Data[0].Result);
                 setIsEmptyMovieList(false);
             }
         }
         fetchMovieList();
     };
-
-    useEffect(() => {
-        const fetchMovieList = async () => {
-            const fetchData = await getMovieFromKMDB(router.query.value);
-            if(!fetchData.Data[0].Result) {
-                setMovieList(undefined);
-                setIsEmptyMovieList(true);
-            } else {
-                setMovieList(fetchData.Data[0].Result);
-                setIsEmptyMovieList(false);
-            }
-        }
-        fetchMovieList();
-    }, [])
     
     const replaceTitle = (title) => {
         return title.replace(/!HS|!HE/g, "");

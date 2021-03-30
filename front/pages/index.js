@@ -1,59 +1,126 @@
-import React, { useState, useEffect } from 'react'
-import Router from 'next/router';
+import React from 'react'
+import styled from 'styled-components';
 
 import AppLayout from '../components/AppLayout'
+import MovieInfoSlider from '../components/MovieInfoSlider';
+import MovieMainSlider from '../components/MovieMainSlider';
 
-import { getMovieGenreFromKMDB } from '../api';
+import { getpopularMovieFromTMDB, getMovieByGenreFromTMDB } from '../api';
 
-function Home() {
-    const [inputValue, setInputValue] = useState([]);
+const WrapMovieList = styled.div`
+    margin-bottom: 3rem;
+`
 
-    useEffect(() => {
-        const fetch = async () => {
-            const fetchData = await getMovieGenreFromKMDB("코메디");
-            console.log(fetchData);
-        }
-        fetch()
-    }, [])
+const TitleOfList = styled.div`
+    color: white;
+    font-size: 2rem;
+`
+const SiteName = styled.h2`
+    text-align: center;
+    font-size: 5rem;
+    color: red;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+`
+export default function Home(props) {
+    const { popularMovie } = props;
+    const { actionMovie } = props;
+    const { comedyMovie } = props;
+    const { animationMovie } = props;
+    const { fantasyMovie } = props;
+    const { sfMovie } = props;
+    
 
-    const handleInputValue = (e) => {
-        setInputValue(e.target.value)
-    };
-
-    const handleSubmitValue = (e) => {
-        e.preventDefault();
-        Router.push({
-            pathname: "/movieSearch",
-            query: { value: inputValue }
-        });
-    };
+    // const movieNameArray = (list) => {
+    //     var arr = [];
+        
+    //     for(let i=0; i<5; i++) {
+    //         arr.push(list[i])
+    //     }
+    //     return arr;
+    // }
 
     return (
         <AppLayout>
-            <div style={{ height: '600px', background: 'gray' }}>
-                <h2 style={{ textAlign: 'center' }}>MovieTalk</h2>
-                <form onSubmit={handleSubmitValue} style={{ textAlign: 'center' }}>
-                    <input placeholder="영화명을 입력해주세요." onChange={handleInputValue} className="btn search-btn" />
-                    <button type="submit">검색</button>
-                </form>
+            <div className="main-content" style={{ height: '80vh', position: 'relative' }}>
+                <MovieMainSlider movieInfomation={popularMovie}></MovieMainSlider>
+                <SiteName>MovieTalk</SiteName>
             </div>
-            <div>
-                <div>
-                    <div>액션 | Action</div>
-                    <div></div>
-                </div>
-                <div>
-                    <div>드라마 | Drama</div>
-                </div>
-                <div>
-                    <div>미스터리 | Mistery</div>
-                </div>
-                <div>
-                    <div>코미디 | Comedy</div>
-                </div>
+            <div style={{ width: '85%', margin: '0 auto' }} className="movie-list">
+                <WrapMovieList>
+                    <TitleOfList>최신 인기 영화</TitleOfList>
+                    { popularMovie &&
+                        (
+                            <MovieInfoSlider movieInfomation={popularMovie} />
+                        )
+                    }
+                </WrapMovieList>
+                <WrapMovieList>
+                    <TitleOfList>무비톡 리뷰순</TitleOfList>
+                </WrapMovieList>
+                <WrapMovieList>
+                    <TitleOfList>액션 | Action</TitleOfList>
+                    { actionMovie &&
+                        (
+                            <MovieInfoSlider movieInfomation={actionMovie} />
+                        )
+                    }
+                </WrapMovieList>
+                <WrapMovieList>
+                    <TitleOfList>코미디 | Drama</TitleOfList>
+                    { comedyMovie &&
+                        (
+                            <MovieInfoSlider movieInfomation={comedyMovie} />
+                        )
+                    }
+                </WrapMovieList>
+                <WrapMovieList>
+                    <TitleOfList>애니메이션 | Animation</TitleOfList>
+                    { animationMovie &&
+                        (
+                            <MovieInfoSlider movieInfomation={animationMovie} />
+                        )
+                    }
+                </WrapMovieList>
+                <WrapMovieList>
+                    <TitleOfList>판타지 | Fantasy</TitleOfList>
+                    { fantasyMovie &&
+                        (
+                            <MovieInfoSlider movieInfomation={fantasyMovie} />
+                        )
+                    }
+                </WrapMovieList>
+                <WrapMovieList>
+                    <TitleOfList>공상과학 | SF</TitleOfList>
+                    { sfMovie &&
+                        (
+                            <MovieInfoSlider movieInfomation={sfMovie} />
+                        )
+                    }
+                </WrapMovieList>   
             </div>
         </AppLayout>
     )
 }
 
-export default Home;
+export async function getServerSideProps() {
+    const popularMovie = await getpopularMovieFromTMDB();
+    const actionMovie = await getMovieByGenreFromTMDB(28);
+    const comedyMovie = await getMovieByGenreFromTMDB(35);
+    const animationMovie = await getMovieByGenreFromTMDB(16);
+    const fantasyMovie = await getMovieByGenreFromTMDB(14);
+    const sfMovie = await getMovieByGenreFromTMDB(878);
+
+    return {
+      props: { 
+        popularMovie: popularMovie.results, 
+        actionMovie: actionMovie.results, 
+        comedyMovie: comedyMovie.results,
+        animationMovie: animationMovie.results,
+        fantasyMovie: fantasyMovie.results,
+        sfMovie: sfMovie.results
+      },
+    }
+}

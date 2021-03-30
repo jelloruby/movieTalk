@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import MovieInfoLayOut from '../../components/MovieInfoLayOut';
 import MovieComment from '../../components/MovieComment'
-import MovieSlider from '../../components/MovieSlider'
+import MovieStllSlider from '../../components/MovieStllSlider'
 import { getMovieInfoFromKMDB } from '../../api'
 
 const MovieBasicInfo = styled.div`
@@ -113,16 +113,19 @@ export default function MovieInfoPage (props) {
             </MovieBasicInfo>
             <MovieDetailInfo>
                 {
-                    result[0].plots && (
+                    result[0].plots &&
+                    (
                         <div>
                             <div>줄거리</div>
                             <div>{result[0].plots.plot[0].plotText}</div>
                         </div>
                     )
                 }
-                { result[0].stlls && (
-                    <MovieSlider movieInfomation={splitStillImages(result[0].stlls)} />
-                )}
+                { result[0].stlls &&
+                    (
+                        <MovieStllSlider movieInfomation={splitStillImages(result[0].stlls)} />
+                    )
+                }
             </MovieDetailInfo>
             <div style={{ width: '80%', margin: '0 auto', border: '1px solid red' }}>
                 <div>댓글</div>
