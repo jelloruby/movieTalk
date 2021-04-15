@@ -1,14 +1,25 @@
 import Link from 'next/link';
 
-function MovieInfoLink({ movieId, movieSeq, src }) {
+import { imageURL, noposterURL } from '../pages/config'
+
+function MovieInfoLink({ id, src, koreanTitle }) {
+
+    const havePosterPath = (posterPath) => {
+        if(!posterPath) {
+            posterPath = noposterURL;
+            return posterPath;
+        } else {
+            return `${imageURL}/w500/${posterPath}`
+        }
+    };
+
     return (
-      <div>
-        <Link href="/movieInfo/[movieId]/[movieSeq]" as={`/movieInfo/${movieId}/${movieSeq}`}>
+        <Link href="/movieInfo/[id]" as={`/movieInfo/${id}`}>
           <a>
-            <img src={src} style={{ height: '310px', verticalAlign: 'top' }} />
+            <img src={havePosterPath(src)} style={{ height: '310px',  }} />
+            <div>{koreanTitle}</div>
           </a>
         </Link>
-      </div>
     )
 };
 

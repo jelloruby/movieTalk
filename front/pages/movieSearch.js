@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import AppLayout from '../components/AppLayout';
-import Router from 'next/router';
-import { withRouter } from 'next/router';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import AppLayout from '../components/layout/AppLayout';
+import { IoSearchSharp } from "react-icons/io5";
 
 import MovieInfoLink from '../components/MovieInfoLink'
-import { getMovieFromKMDB } from '../api';
+import { getMovieFromTMDB } from './api/api';
 
-function movieSearch({ router }) {
+const SearchInput = styled.input`
+    background: rgb(255, 255, 255);
+    width: 50%;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 2rem;
+`
+
+function movieSearch() {
     const [inputValue, setInputValue] = useState("");
     const [movieList, setMovieList] = useState(false);
     const [IsEmptymovieList, setIsEmptyMovieList] = useState(false);
@@ -19,37 +29,26 @@ function movieSearch({ router }) {
         e.preventDefault();
 
         const fetchMovieList = async () => {
-            const fetchData = await getMovieFromKMDB(inputValue);
-            if(!fetchData.Data[0].Result) {
+            const fetchData = await getMovieFromTMDB(inputValue);
+            console.log(fetchData.results);
+            if(!fetchData.results) {
                 setMovieList(undefined);
                 setIsEmptyMovieList(true);
             } else {
-                setMovieList(fetchData.Data[0].Result);
-                console.log(fetchData.Data[0].Result);
+                setMovieList(fetchData.results);
                 setIsEmptyMovieList(false);
             }
         }
         fetchMovieList();
     };
     
-    const replaceTitle = (title) => {
-        return title.replace(/!HS|!HE/g, "");
-    };
-
-    const splitPoster = (posters) => {
-        if(!posters) {
-            posters = "https://res.cloudinary.com/dvmqbovxh/image/upload/v1616866172/noposter_pcwcby.png";
-            return posters;
-        } else {
-            return posters.split("|")[0];
-        }
-    };
-    
     return (
         <AppLayout>
             <form onSubmit={handleSubmitValue} style={{ textAlign: 'center' }}>
-                <input placeholder="영화명을 입력해주세요." onChange={handleInputValue} className="btn search-btn" />
-                <button type="submit">검색</button>
+                <SearchInput placeholder="영화명을 입력해주세요." onChange={handleInputValue} />
+                <button type="submit" className="btn search-btn">
+                    <IoSearchSharp style={{ color: 'white', fontSize: '2rem' }} />
+                </button>
             </form>
             <div>
                 {
@@ -60,24 +59,19 @@ function movieSearch({ router }) {
                 {
                     movieList && (
                         <>
-                            <select>
-                                <option>정확도</option>
-                            </select>
-                            <div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', width: '80%', margin: '0 auto', marginTop: '2rem' }}>
                             {
                                 movieList.map(movieItem => (
-                                    <div key={movieItem.movieSeq}>
+                                    <div key={movieItem.id} style={{ width: '210px', margin: '0 1rem' }}>
                                         <MovieInfoLink
-                                            movieSeq={movieItem.movieSeq}
-                                            src={splitPoster(movieItem.posters)}
-                                            movieId={movieItem.movieId}
+                                            id={movieItem.id}
+                                            src={movieItem.poster_path}
+                                            koreanTitle={movieItem.title}
                                         />
-                                        <div>{replaceTitle(movieItem.title)}</div>
                                     </div>
                                 ))
                             }
-                            </div>  
-
+                            </div>
                         </>
                     )
                 }
@@ -86,4 +80,4 @@ function movieSearch({ router }) {
     );
 };
 
-export default withRouter(movieSearch);
+export default movieSearch;

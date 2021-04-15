@@ -13,11 +13,12 @@
 body {
     background: black;
     font-family: 'GmarketSansMedium';
-
+    color: white;
 }
 
 a {
     text-decoration: none;
+    color: white;
 }
 
 li {
@@ -34,34 +35,20 @@ li {
 .main-content .slick-slider {
     height: 100%;
     overflow: hidden;
-    opacity: .5;
+    opacity: .4;
 }
 
 .main-content .slick-list {
     height: 100%;
 }
-.main-slider-item {
-    border: 1px solid red;
-    /* animation: imageScale 10s linear infinite; */
-}
+
 .main-slider-item > img {
     position: relative;
     height: 2000px;
     left: 50%;
     top: 10%;
     transform: translate(-50%, -10%);
-    /* animation: imageScale 10s linear infinite; */
 }
-
-@keyframes imageScale {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(3);
-    }
-}
-
 
 /* 메인슬라이드2 */
 .movie-list .slick-slide > div {
@@ -72,6 +59,15 @@ li {
     margin: 0 -10px;
 }
 
+
+/* 배우슬라이드 */
+.actors-slider .slick-slide > div {
+    position: relative;
+    left: 2px;
+}
+
+
+/* 슬라이드버튼 */
 .slick-prev {
     left: -3rem;
     z-index: 1;
@@ -85,19 +81,34 @@ li {
 }
 
 
-
-
 /* 작은 단위 컴포넌트의 스타일 */
 .btn {
     border: none;
 }
 
 .btn.search-btn {
-    background: rgb(255, 178, 35);
-    width: 500px;
-    height: 60px;
     margin: 0 auto;
+    border-radius: 2rem;
+    background: none;
     text-align: center;
-    border-radius: 2px;
+    position: relative;
+    top: .5rem;
+    left: 1rem;
+    cursor: pointer;
 }
 
+.btn.login-btn {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin-top: 1rem;
+    background: white;
+    font-family: 'GmarketSansMedium';
+    cursor: pointer;
+}
+
+.login-form > div + div,
+.signup-form > div + div {
+    margin-top: 1rem;
+}

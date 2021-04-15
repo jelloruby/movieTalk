@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import '../styles/global.css'
-// import withReduxSaga from 'redux-saga'
 
 import wrapper from '../store/configureStore'
 
@@ -19,4 +18,4 @@ function App({ Component, pageProps }) {
     )
 }
 
-export default wrapper.withRedux(App)
+export default wrapper.withRedux(App);

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var imageURL = 'https://image.tmdb.org/t/p';","map":{"version":3,"sources":["C:/codingtime/movieBox/front/pages/config.js"],"names":["imageURL"],"mappings":"AAAA,OAAO,IAAMA,QAAQ,GAAG,4BAAjB","sourcesContent":["export const imageURL = 'https://image.tmdb.org/t/p';\r\n"]},"metadata":{},"sourceType":"module"}
