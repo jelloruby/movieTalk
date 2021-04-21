@@ -16,7 +16,7 @@ function MovieInfoLink({ id, src, koreanTitle }) {
     return (
         <Link href="/movieInfo/[id]" as={`/movieInfo/${id}`}>
           <a>
-            <img src={havePosterPath(src)} style={{ height: '310px',  }} />
+            <img src={havePosterPath(src)} style={{ width: '210px', height: '310px' }} />
             <div>{koreanTitle}</div>
           </a>
         </Link>

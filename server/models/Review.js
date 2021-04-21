@@ -6,12 +6,18 @@ const reviewSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    text: {
+    iamge: {
         type: String,
     },
     name: {
         type: String,
-    }
+    },
+    rating: {
+        type: Number,
+    },
+    text: {
+        type: String,
+    },
 });
 
 const Review = mongoose.model('Review', reviewSchema);

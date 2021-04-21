@@ -7,9 +7,8 @@ function MovieInfoSlider({ movieInfomation }) {
     const settings = {
         dots: false, 
         infinite: true,
-        slidesToShow: 7,
-        slidesToScroll: 7,
-        speed: 500,
+        slidesToShow: 8,
+        slidesToScroll: 8,
         arrows: false,
         autoplay: false,
         initialSlide: 0,

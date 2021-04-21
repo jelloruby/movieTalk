@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const app = express();
 const mongoose = require('mongoose');
 
-const config = require('./config/key');
+const config = require('./config/dev');
 
 const userRouter = require('./routes/user');
 const reviewRouter = require('./routes/review');

@@ -25,7 +25,6 @@ li {
     list-style: none;
 }
 
-
 /* 슬라이드 스타일 */
 /* 메인슬라이드1 */
 .main-content {
@@ -44,7 +43,7 @@ li {
 
 .main-slider-item > img {
     position: relative;
-    height: 2000px;
+    height: 100%;
     left: 50%;
     top: 10%;
     transform: translate(-50%, -10%);

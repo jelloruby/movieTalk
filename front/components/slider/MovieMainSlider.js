@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Slider from "react-slick";
 
 import { imageURL } from '../../pages/config'
@@ -9,12 +9,11 @@ function MovieMainSlider({ movieInfomation }) {
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
-        speed: 500,
+        speed: 1500,
         fade: true,
         arrows: false,
         autoplay: true,
         initialSlide: 0,
-
     };
 
     return (
@@ -27,7 +26,6 @@ function MovieMainSlider({ movieInfomation }) {
                 ))
             }
         </Slider>
-
     )
 }
 

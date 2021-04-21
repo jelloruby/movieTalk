@@ -3,7 +3,6 @@ import { combineReducers } from 'redux';
 import user from '../reducers/user'
 import review from '../reducers/review'
 
-
 const rootReducer = (state, action) => {
     switch (action.type) {
         case HYDRATE:
