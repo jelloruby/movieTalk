@@ -1,34 +1,39 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
 import Slider from "react-slick";
 
-import { imageURL } from '../../pages/config'
+import SlickNextBotton from '../Botton/SlickNextBotton';
+import SlickPrevBotton from '../Botton/SlickPrevBotton';
+import { imageURL } from '../../config/config';
 
 function MovieInfoSlider({ movieInfomation }) {
     const settings = {
-        dots: false, 
+        dots: true, 
         infinite: true,
-        slidesToShow: 8,
-        slidesToScroll: 8,
-        arrows: false,
+        slidesToShow: 7,
+        slidesToScroll: 7,
+        arrows: true,
         autoplay: false,
+        prevArrow: <SlickPrevBotton />,
+        nextArrow: <SlickNextBotton />,
         initialSlide: 0,
         responsive: [
             {
-              breakpoint: 1024,
+              breakpoint: 900,
               settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
+                slidesToShow: 4,
+                slidesToScroll: 4,
                 infinite: true,
               }
             },
             {
-              breakpoint: 840,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-              }
-            },
+                breakpoint: 450,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 2,
+                  infinite: true,
+                }
+              },
         ],
     };
     
@@ -45,14 +50,20 @@ function MovieInfoSlider({ movieInfomation }) {
         <Slider {...settings}>
             {
                 movieInfomation.map(item => (
-                    <div key={item.id} >
-                        <img src={havePosterPath(item.poster_path)} style={{ width: '100%', borderRadius: '10px'}} />
-                    </div>
+                    <Link
+                        href="/movieInfo/[id]"
+                        as={`/movieInfo/${item.id}`}
+                        key={item.id}
+                    >
+                        <a style={{ cursor: 'pointer' }}>
+                            <img src={havePosterPath(item.poster_path)} style={{ width: '100%', borderRadius: '10px'}} />
+                        </a>
+                    </Link>
                 ))
             }
         </Slider>
 
     )
-}
+};
 
-export default MovieInfoSlider
+export default MovieInfoSlider;

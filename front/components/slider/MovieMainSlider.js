@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
 
-import { imageURL } from '../../pages/config'
+import { imageURL } from '../../config/config';
 
 function MovieMainSlider({ movieInfomation }) {
     const settings = {
@@ -21,7 +21,7 @@ function MovieMainSlider({ movieInfomation }) {
             {
                 movieInfomation.map(item => (
                     <div key={item.id} className="main-slider-item">
-                        <img src={`${imageURL}/original/${item.backdrop_path}`} />
+                        <div style={{ background: `url(${imageURL}/original/${item.backdrop_path}) center center / cover no-repeat`, height: '100vh' }}></div>
                     </div>
                 ))
             }

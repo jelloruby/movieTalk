@@ -6,10 +6,13 @@ const reviewSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    iamge: {
+    likers: {
+        type: Array,
+    },
+    image: {
         type: String,
     },
-    name: {
+    title: {
         type: String,
     },
     rating: {
@@ -18,7 +21,10 @@ const reviewSchema = mongoose.Schema({
     text: {
         type: String,
     },
-});
+    movieId: {
+        type: Number,
+    }
+}, { timestamps: true });
 
 const Review = mongoose.model('Review', reviewSchema);
 

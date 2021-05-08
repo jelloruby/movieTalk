@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getpopularMovieFromTMDB = () => axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=2b2e61361a6d20a07e728e56fc296333&&sort_by=popularity.desc&language=ko&page=1®ion=KR`)
+export const getPopularMovieFromTMDB = () => axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=2b2e61361a6d20a07e728e56fc296333&&sort_by=popularity.desc&language=ko&page=1®ion=KR`)
     .then((res) => {
         return res.data
     })

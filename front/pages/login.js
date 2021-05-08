@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import styled from 'styled-components';
 
-import UserLayout from '../components/layout/UserLayout';
-import LoginForm from '../components/LoginForm';
+import UserLayout from '../components/Layout/UserLayout';
+import LoginForm from '../components/Form/LoginForm';
 
 const GoogleLink = styled.a`
     width: 300px;
@@ -12,7 +12,7 @@ const GoogleLink = styled.a`
     padding: 6px 16px;
     box-sizing: border-box;
     border: 1px solid gray;
-    background: black;
+    background: rgba(0, 0, 0, 0);
     text-align: center;
 `
 

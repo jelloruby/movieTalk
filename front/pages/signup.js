@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
 
-import UserLayout from '../components/layout/UserLayout';
-import SignUpForm from '../components/SignUpForm';
+import UserLayout from '../components/Layout/UserLayout';
+import SignUpForm from '../components/Form/SignUpForm';
 
 function signup() {
     const { signUpDone, signUpError } = useSelector((state) => state.user);

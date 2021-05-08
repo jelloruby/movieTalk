@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { imageURL, noposterURL } from '../pages/config'
+import { imageURL, noposterURL } from '../config/config';
 
 function MovieInfoLink({ id, src, koreanTitle }) {
 
@@ -15,7 +15,7 @@ function MovieInfoLink({ id, src, koreanTitle }) {
 
     return (
         <Link href="/movieInfo/[id]" as={`/movieInfo/${id}`}>
-          <a>
+          <a style={{ cursor: 'pointer' }}>
             <img src={havePosterPath(src)} style={{ width: '210px', height: '310px' }} />
             <div>{koreanTitle}</div>
           </a>

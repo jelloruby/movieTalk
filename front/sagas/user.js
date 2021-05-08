@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { all, fork, call, put, takeLatest, delay } from 'redux-saga/effects';
+import { all, fork, call, put, takeLatest } from 'redux-saga/effects';
 import {
     LOG_IN_REQUEST,
     LOG_IN_FAILURE,
@@ -17,43 +17,10 @@ import {
 
 
 
-// api
-function loginAPI(data) {
-    return axios({
-        method: 'post',
-        url: '/user/login',
-        withCredentials: true,
-        data: data
-    })
+function loginAPI(data){
+    return axios.post('/user/login', data)
 }
 
-function signUpAPI(data) {
-    return axios({
-        method: 'post',
-        url: '/user/signup',
-        withCredentials: true,
-        data: data
-    })
-}
-
-function logoutAPI() {
-    return axios({
-        method: 'post',
-        url: '/user/logout',
-        withCredentials: true,
-    })
-}
-
-function loadMyInfoAPI() {
-    return axios({
-        method: 'get',
-        url: '/user',
-    })
-}
-
-
-
-// action - reducers
 function* logIn(action) {
     try {
         const result =  yield call(loginAPI, action.data)
@@ -72,6 +39,10 @@ function* logIn(action) {
     }
 }
 
+function signUpAPI(data){
+    return axios.post('/user/signup', data)
+}
+
 function* signUp(action) {
     try {
         const result =  yield call(signUpAPI, action.data)
@@ -88,6 +59,10 @@ function* signUp(action) {
     }
 }
 
+function logoutAPI(){
+    return axios.post('/user/logout', data)
+}
+
 function* logOut() {
     try {
         yield call(logoutAPI)
@@ -102,6 +77,10 @@ function* logOut() {
             data: err.response.data
         })
     }
+}
+
+function loadMyInfoAPI() {
+    return axios.get('/user')
 }
 
 function* loadMyInfo() {
@@ -122,7 +101,6 @@ function* loadMyInfo() {
 
 
 
-// start function
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn)
 }

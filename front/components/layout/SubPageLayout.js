@@ -1,13 +1,24 @@
 import React from 'react'
-import Nav from '../Nav'
+import Nav from '../Menu/Nav';
+import styled from 'styled-components';
+
+const SubPageChildren = styled.div`
+    margin-left: 200px;
+    margin-top: 60px;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 900px) {
+        margin-left: 0;
+    }
+`
 
 function SubPageLayout({ children }) {
     return (
         <div>
             <Nav />
-            <div style={{ marginLeft: '200px', boxSizing: 'border-box' }}>
+            <SubPageChildren>
                 { children }
-            </div>
+            </SubPageChildren>
         </div>
     )
 };

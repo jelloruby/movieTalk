@@ -1,9 +1,9 @@
 import React from 'react';
-import Nav from '../Nav'
+import Nav from '../Menu/Nav';
 
 function MainPageLayout({ children }) {
     return (
-        <div>
+        <div style={{ width: '100%' }}>
             <Nav />
             { children }
         </div>

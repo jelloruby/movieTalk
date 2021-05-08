@@ -5,7 +5,7 @@ import userSaga from './user';
 import reviewSaga from './review';
 
 axios.defaults.baseURL = 'http://localhost:5000';
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
     yield all([

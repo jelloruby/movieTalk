@@ -39,7 +39,6 @@ const reducer = (state=initialState, action) => {
             return state = {
                 ...state,
                 logInDone: false,
-                logInError: null,
             }
         case LOG_IN_SUCCESS:
             console.log('reducer LOGIN - SUCCESS - user');
@@ -59,7 +58,6 @@ const reducer = (state=initialState, action) => {
             return state = {
                 ...state,
                 signUpDone: false,
-                signUpError: null,
             }
         case SIGN_UP_SUCCESS:
             console.log('reducer SIGN-UP - SUCCESS - user');
@@ -77,7 +75,6 @@ const reducer = (state=initialState, action) => {
             return state = {
                 ...state,
                 logOutDone: false,
-                logOutError: null,
             }
         case LOG_OUT_SUCCESS:
             console.log('reducer LOG_OUT - SUCCESS - user');
@@ -97,7 +94,6 @@ const reducer = (state=initialState, action) => {
             return state = {
                 ...state,
                 loadMyInfoDone: false,
-                loadMyInfoError: null,
             }
         case LOAD_MY_INFO_SUCCESS:
             console.log('reducer LOAD_MY_INFO - SUCCESS - user');
@@ -115,7 +111,6 @@ const reducer = (state=initialState, action) => {
                     me: action.data
                 }
             }
-
         case LOAD_MY_INFO_FAILURE:
             return state = {
                 ...state,

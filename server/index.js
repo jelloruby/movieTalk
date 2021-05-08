@@ -6,13 +6,16 @@ const passport = require('passport');
 const dotenv = require('dotenv');
 const app = express();
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 const config = require('./config/dev');
 
+
 const userRouter = require('./routes/user');
 const reviewRouter = require('./routes/review');
+const reviewsRouter = require('./routes/reviews');
 
-// const passportConfig = require('./passport');
+
 require('./passport/passport');
 
 dotenv.config();
@@ -27,6 +30,7 @@ mongoose.connect(config.mongoURI, {
 
 
 // 미들웨어
+app.use(morgan('dev'));
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
@@ -44,10 +48,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 app.use('/user', userRouter);
 app.use('/review', reviewRouter);
+app.use('/reviews', reviewsRouter);
 
 app.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
@@ -56,6 +59,7 @@ app.get('/auth/google', passport.authenticate('google', {
 app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
     res.redirect("http://localhost:3000/");
 });
+
 
 const port = 5000;
 
